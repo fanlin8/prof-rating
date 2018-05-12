@@ -1,0 +1,19 @@
+<p>
+  user-page works!
+</p>
+
+<div>
+  <mat-button-toggle-group #optionGroup="matButtonToggleGroup">
+    <mat-button-toggle value="board" (change)="buttonToggled(optionGroup.value)">
+      User Board
+    </mat-button-toggle>
+    <mat-button-toggle value="profile" (change)="buttonToggled(optionGroup.value)">
+      User Group
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+</div>
+
+<div>
+  <router-outlet></router-outlet>
+</div>

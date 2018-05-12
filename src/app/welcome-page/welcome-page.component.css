@@ -1,0 +1,26 @@
+#welcomeCard {
+    min-width: 25%;
+    min-height: 25%;
+}
+
+.home-page {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 100%;
+    margin: 0;
+    background-image: url("/assets/img/welcome/welcome.png")
+}
+
+md-card {
+    background: rgba(255, 255, 255, 0.38);
+}
+
+button {
+    background-color: rgba(0,0,0,.06);
+}
+
+.mat-card-content {
+    text-align: center;
+}
+

@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <a class="navbar-pic" routerLink="/main">
+    <img [src]="'assets/img/angular.png'" />
+  </a>
+
+  <button class="nav-button" mat-button [matMenuTriggerFor]="pagesMenu">
+    Pages
+  </button>
+  <mat-menu #pagesMenu="matMenu">
+    <button mat-menu-item routerLink="page-one" routerLinkActive="active">Page One</button>
+    <button mat-menu-item routerLink="page-two" routerLinkActive="active">Page Two</button>
+    <button disabled mat-menu-item routerLink="" routerLinkActive="active">Disabled</button>
+  </mat-menu>
+
+  <button mat-button class="nav-button" routerLink="page-three" routerLinkActive="active">Page Three</button>
+  <button mat-button class="nav-button" routerLink="user" *ngIf="auth.isLoggedIn" routerLinkActive="active">User</button>
+
+  <button mat-button id="logoutButton" *ngIf="auth.isLoggedIn" (click)="auth.logout()" routerLink="/main">
+    <mat-icon>launch</mat-icon>Logout</button>
+  <button mat-button id="loginButton" *ngIf="!auth.isLoggedIn" routerLink="login">
+    <mat-icon>exit_to_app</mat-icon>Login</button>
+</mat-toolbar>
