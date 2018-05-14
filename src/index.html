@@ -16,11 +16,22 @@
       height: 100%;
       margin: 0;
     }
+
+    .loading {
+      position: absolute;
+      top: 28%; 
+      left: 37%;
+      background-color: #fff;
+    }
   </style>
 </head>
 
 <body>
-  <app-root>Loading...</app-root>
+  <app-root>
+    <div class="loading">
+      <img src="assets/gif/loading.gif" alt="loading">
+    </div>
+  </app-root>
 </body>
 
 </html>

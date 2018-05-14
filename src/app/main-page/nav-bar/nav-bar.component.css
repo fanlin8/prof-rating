@@ -2,7 +2,7 @@
   height: 64px;
 }
 
-button#logoutButton {
+.end-buttons {
 	position: absolute;
 	right: 10px;
 }

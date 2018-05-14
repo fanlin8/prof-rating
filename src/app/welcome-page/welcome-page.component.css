@@ -12,8 +12,8 @@
     background-image: url("/assets/img/welcome/welcome.png")
 }
 
-md-card {
-    background: rgba(255, 255, 255, 0.38);
+.transparent-card {
+    background: rgba(255,255, 255, 0.8);
 }
 
 button {

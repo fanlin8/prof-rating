@@ -1,14 +1,13 @@
-<div class="home-page">
+<div [ngClass]="'home-page'">
   <div id="welcomeCard">
-    <mat-card>
+    <mat-card [ngClass]="'transparent-card'">
       <mat-card-header>
-        <mat-card-title>Angular Templete</mat-card-title>
+        <mat-card-title [ngClass]="'card-title'">Harrisburg University Information System</mat-card-title>
         <mat-card-subtitle>Angelix</mat-card-subtitle>
       </mat-card-header>
-      <!--<img mat-card-image src="assets/img/welcome/welcome-card.jpg">-->
       <mat-card-content>
-        <button mat-raised-button style="margin-bottom: 24px;" routerLink="/main">Continue</button>
-        <div>This is a Angular Material Templete.</div>
+        <button mat-raised-button color="primary" style="margin-bottom: 24px;" routerLink="/main">Continue</button>
+        <div>This is a Angular Material POC application.</div>
       </mat-card-content>
     </mat-card>
   </div>

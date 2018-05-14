@@ -1,0 +1,20 @@
+.information-card {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.infor-wrapper {
+    margin: 48px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.infor-title {
+    padding: 24px 24px;
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+}
+
+.infor-body {
+    padding: 0 24px 12px 24px;
+    text-align: center;
+}

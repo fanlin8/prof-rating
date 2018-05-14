@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
-  <a class="navbar-pic" routerLink="/main">
+  <a [ngClass]="'navbar-pic'" routerLink="/main">
     <img [src]="'assets/img/angular.png'" />
   </a>
 
-  <button class="nav-button" mat-button [matMenuTriggerFor]="pagesMenu">
+  <button [ngClass]="'nav-button'" mat-button [matMenuTriggerFor]="pagesMenu">
     Pages
   </button>
   <mat-menu #pagesMenu="matMenu">
@@ -12,11 +12,15 @@
     <button disabled mat-menu-item routerLink="" routerLinkActive="active">Disabled</button>
   </mat-menu>
 
-  <button mat-button class="nav-button" routerLink="page-three" routerLinkActive="active">Page Three</button>
-  <button mat-button class="nav-button" routerLink="user" *ngIf="auth.isLoggedIn" routerLinkActive="active">User</button>
+  <button mat-button [ngClass]="'nav-button'" routerLink="page-three" routerLinkActive="active">Page Three</button>
 
-  <button mat-button id="logoutButton" *ngIf="auth.isLoggedIn" (click)="auth.logout()" routerLink="/main">
-    <mat-icon>launch</mat-icon>Logout</button>
+  <div [ngClass]="'end-buttons'">
+    <button mat-button routerLink="user" *ngIf="auth.isLoggedIn" routerLinkActive="active">
+      <mat-icon>account_circle</mat-icon>User</button>
+    <button mat-button *ngIf="auth.isLoggedIn" (click)="auth.logout()" routerLink="/main">
+      <mat-icon>directions_run</mat-icon>Logout</button>
+  </div>
+
   <button mat-button id="loginButton" *ngIf="!auth.isLoggedIn" routerLink="login">
     <mat-icon>exit_to_app</mat-icon>Login</button>
 </mat-toolbar>

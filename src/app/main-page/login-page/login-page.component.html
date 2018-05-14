@@ -1,6 +1,16 @@
-<h2>LOGIN</h2>
-<p>{{message}}</p>
-<p>
-  <button (click)="login()" *ngIf="!authService.isLoggedIn">Login</button>
-  <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
-</p>
+<div class="login-card-wrapper">
+<mat-card [ngClass]="{'login-card': true}">
+  <mat-card-header>
+    <mat-card-title>LOGIN</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{message}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="login()" *ngIf="!authService.isLoggedIn">Login</button>
+    <button mat-button color="primary" (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+  </mat-card-actions>
+</mat-card>
+</div>
