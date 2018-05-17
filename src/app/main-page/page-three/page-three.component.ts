@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 import { ProfessorService } from '../../services/professor.service';
 import { Professor } from '../../models/professor';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-page-three',
@@ -10,15 +11,12 @@ import { Professor } from '../../models/professor';
 })
 export class PageThreeComponent implements OnInit {
 
-  professors: Professor[];
+  professors$: Observable<Professor[]>;
 
   constructor(private messageService: MessageService, private professorService: ProfessorService) { }
 
   ngOnInit() {
-    this.professorService.getProfessors().subscribe(professors => {
-      this.professors = professors;
-      console.log(this.professors);
-    });
+    this.professors$ = this.professorService.getProfessors();
   }
 
   private log(message: string) {

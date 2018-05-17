@@ -13,7 +13,12 @@
           <button mat-mini-fab color="accent" (click)="sideDrawer.toggle()">
             <mat-icon>chevron_right</mat-icon>
           </button>
-          Rating works!
+          <div>
+            <div>Header</div>
+            <div *ngFor="let professor of professors$ | async">
+              {{professor.firstName + " " + professor.lastName}}
+            </div>
+          </div>
         </div>
       </mat-drawer-content>
     </mat-drawer-container>

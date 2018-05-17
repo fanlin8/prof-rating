@@ -15,6 +15,7 @@ import { CallBackComponent } from './call-back/call-back.component';
 import { MaterialModule } from '../material.module';
 import { ProfessorService } from '../services/professor.service';
 import { MessagesComponent } from '../utils/messages/messages.component';
+import { ProfessorCardComponent } from './page-three/professor-card/professor-card.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MessagesComponent } from '../utils/messages/messages.component';
     FooterComponent,
     InfoPageComponent,
     CallBackComponent,
-    MessagesComponent
+    MessagesComponent,
+    ProfessorCardComponent
   ],
   imports: [
     FormsModule,
