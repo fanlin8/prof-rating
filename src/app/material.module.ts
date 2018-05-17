@@ -2,12 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  MatButtonModule, MatCheckboxModule, MatSidenavModule,
-  MatToolbarModule, MatInputModule, MatRadioModule,
-  MatSelectModule, MatMenuModule, MatGridListModule,
-  MatCardModule, MatIconModule, MatProgressSpinnerModule,
-  MatProgressBarModule, MatDialogModule, MatTooltipModule,
-  MatSnackBarModule, MatTabsModule, MatExpansionModule,
+  MatButtonModule, MatCheckboxModule, MatSidenavModule, MatToolbarModule, MatInputModule, MatRadioModule,
+  MatSelectModule, MatMenuModule, MatGridListModule, MatCardModule, MatIconModule, MatProgressSpinnerModule,
+  MatProgressBarModule, MatDialogModule, MatTooltipModule, MatSnackBarModule, MatTabsModule, MatExpansionModule,
   MatAutocompleteModule, MatStepperModule, MatListModule, MatChipsModule, MatDatepickerModule, MatNativeDateModule, MatButtonToggleModule
 } from '@angular/material';
 

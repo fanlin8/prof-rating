@@ -13,6 +13,8 @@ import { InfoPageComponent } from './info-page/info-page.component';
 import { CallBackComponent } from './call-back/call-back.component';
 
 import { MaterialModule } from '../material.module';
+import { ProfessorService } from '../services/professor.service';
+import { MessagesComponent } from '../utils/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { MaterialModule } from '../material.module';
     NavBarComponent,
     FooterComponent,
     InfoPageComponent,
-    CallBackComponent
+    CallBackComponent,
+    MessagesComponent
   ],
   imports: [
     FormsModule,
@@ -34,6 +37,8 @@ import { MaterialModule } from '../material.module';
   ],
   entryComponents: [
   ],
-  providers: [],
+  providers: [
+    ProfessorService
+  ],
 })
 export class MainPageModule { }

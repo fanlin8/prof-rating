@@ -6,6 +6,32 @@
     background: rgba(0, 0, 0, 0.10);
 }
 
+.spacer {
+    height: 24px;
+}
+
 .card-title {
     font-size: 24px !important;
+}
+
+.app-page {
+    padding-top: 64px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.page-body {
+    padding: 24px;
+}
+
+.page-header {
+    height: 64px;
+    background-color: #00acc1;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.page-header-title {
+    padding: 0 24px;
+    font-size: larger;
 }

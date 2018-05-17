@@ -11,7 +11,7 @@ export class LoginPageComponent implements OnInit {
 
   message: string;
 
-  constructor(public authService: AuthService, public router: Router) {
+  constructor(private authService: AuthService, public router: Router) {
     this.setMessage();
   }
 
@@ -41,6 +41,10 @@ export class LoginPageComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.setMessage();
+  }
+
+  isLoggedIn() {
+    return this.authService.isLoggedIn;
   }
 
 }

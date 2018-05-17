@@ -1,4 +1,4 @@
-import { HttpModule, RequestOptions, Http } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -13,6 +13,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuardService } from './services/auth/auth-guard.service';
+import { MessageService } from './services/message.service';
 
 @NgModule({
   declarations: [
@@ -25,11 +26,12 @@ import { AuthGuardService } from './services/auth/auth-guard.service';
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
-    HttpModule
+    HttpClientModule
   ],
   providers: [
     AuthGuardService,
-    AuthService
+    AuthService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

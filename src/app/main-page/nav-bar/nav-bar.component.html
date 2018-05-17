@@ -12,15 +12,15 @@
     <button disabled mat-menu-item routerLink="" routerLinkActive="active">Disabled</button>
   </mat-menu>
 
-  <button mat-button [ngClass]="'nav-button'" routerLink="page-three" routerLinkActive="active">Evalutaion</button>
+  <button mat-button [ngClass]="'nav-button'" routerLink="page-three" routerLinkActive="active">Rating</button>
 
   <div [ngClass]="'end-buttons'">
-    <button mat-button routerLink="user" *ngIf="auth.isLoggedIn" routerLinkActive="active">
+    <button mat-button routerLink="user" *ngIf="isLoggedIn" routerLinkActive="active">
       <mat-icon>account_circle</mat-icon>User</button>
-    <button mat-button *ngIf="auth.isLoggedIn" (click)="auth.logout()" routerLink="/main">
+    <button mat-button *ngIf="isLoggedIn" (click)="logout()" routerLink="/main">
       <mat-icon>directions_run</mat-icon>Logout</button>
   </div>
 
-  <button mat-button id="loginButton" *ngIf="!auth.isLoggedIn" routerLink="login">
+  <button mat-button id="loginButton" *ngIf="!isLoggedIn" routerLink="login">
     <mat-icon>exit_to_app</mat-icon>Login</button>
 </mat-toolbar>
