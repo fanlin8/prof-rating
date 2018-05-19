@@ -5,8 +5,8 @@ export class Professor {
     middleName: string;
     firstName: string;
     courses: string[];
-    evaluationOnsite: String;
-    evaluationOnline: String;
-    rating: Number
+    evaluationOnsite: string;
+    evaluationOnline: string;
+    rating: number
 
 }

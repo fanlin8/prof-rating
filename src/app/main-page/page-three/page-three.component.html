@@ -5,21 +5,49 @@
     </div>
 
     <mat-drawer-container>
-      <mat-drawer mode="side" opened="false" #sideDrawer>
-        Drawer content
+      <mat-drawer mode="side" opened="true" #sideDrawer>
+        <div class="side-drawer">
+            <mat-toolbar>Category</mat-toolbar>
+          <div class="drawer-content">
+            <mat-checkbox style="display: block" [(ngModel)]="categoryAll" (change)="categoryAllChange()">ALL</mat-checkbox>
+            <mat-checkbox style="display: block" *ngFor="let course of availableCourse; let i = index" [(ngModel)]="category[i]" (change)="categoryChange()">{{course}}</mat-checkbox>
+          </div>
+        </div>
       </mat-drawer>
       <mat-drawer-content>
-        <div class="page-body">
+        <div class="prof-page-header">
           <button mat-mini-fab color="accent" (click)="sideDrawer.toggle()">
-            <mat-icon>chevron_right</mat-icon>
+            <mat-icon *ngIf="!sideDrawer.opened">chevron_right</mat-icon>
+            <mat-icon *ngIf="sideDrawer.opened">chevron_left</mat-icon>
           </button>
-          <div>
-            <div>Header</div>
-            <div *ngFor="let professor of professors$ | async">
-              {{professor.firstName + " " + professor.lastName}}
+          <div style="display: inline-block; margin-left: 12px;">
+            <mat-form-field>
+              <mat-label>Search</mat-label>
+              <input matInput placeholder="Professor or Course" [formControl]="inputControl">
+              <button mat-button *ngIf="inputControl.value" matSuffix mat-icon-button (click)="inputControl.setValue('')">
+                <mat-icon>close</mat-icon>
+              </button>
+              <mat-hint>Search a Rating!</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Sort by" [(ngModel)]="selectedSort" (selectionChange)="onSortChange()">
+                <mat-option *ngFor="let option of sortOptions" [value]="option">{{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="page-body">
+          <div *ngIf="professors; else loading">
+            <div *ngFor="let professor of filteredProfessors | async" class="professor-card">
+              <app-professor-card [professor]="professor"></app-professor-card>
             </div>
           </div>
         </div>
+        <ng-template #loading>
+          <mat-progress-bar mode="query"></mat-progress-bar>
+        </ng-template>
       </mat-drawer-content>
     </mat-drawer-container>
   </div>

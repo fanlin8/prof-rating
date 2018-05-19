@@ -24,7 +24,7 @@ export class ProfessorService {
   getProfessors(): Observable<Professor[]> {
     return this.http.get<Professor[]>(this.professorsUrl)
     .pipe(
-      tap(professors => this.log("Professors Got!!!")),
+      tap(professors => this.log("Professors DATA Got!")),
       catchError(this.handleError("getProfessors()", []))
     );
   }

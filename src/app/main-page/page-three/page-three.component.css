@@ -1,0 +1,17 @@
+.prof-page-header {
+    padding: 12px;
+}
+
+.side-drawer {
+    width: 200px;
+}
+
+.drawer-content {
+    padding: 24px;
+}
+
+.professor-card {
+    width: 50%;
+    min-width: 500px;
+    padding-bottom: 6px;
+}

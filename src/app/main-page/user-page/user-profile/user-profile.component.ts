@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 // import { AuthService } from '../../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -15,7 +15,7 @@ export class UserProfileComponent implements OnInit {
   message: string;
 
   // constructor(public auth: AuthService, public http: Http, public authHttp: AuthHttp) { }
-  constructor(public http: Http) { }
+  constructor() { }
 
   ngOnInit() {
     // if (this.auth.userProfile) {

@@ -15,6 +15,7 @@ export class LoginPageComponent implements OnInit {
     this.setMessage();
   }
 
+
   ngOnInit() {
   }
 
