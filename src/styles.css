@@ -35,3 +35,23 @@
     padding: 0 24px;
     font-size: larger;
 }
+
+.mat-progress-spinner.rating-1 circle {
+    stroke: rgb(255, 51, 51);
+}
+
+.mat-progress-spinner.rating-2 circle {
+    stroke: rgb(255, 153, 51);
+}
+
+.mat-progress-spinner.rating-3 circle {
+    stroke: rgb(255, 204, 51);
+}
+
+.mat-progress-spinner.rating-4 circle {
+    stroke: rgb(255, 255, 51);
+}
+
+.mat-progress-spinner.rating-5 circle {
+    stroke: rgb(51, 255, 51);
+}

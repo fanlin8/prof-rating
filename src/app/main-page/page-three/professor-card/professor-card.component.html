@@ -1,5 +1,5 @@
 <mat-accordion>
-  <mat-expansion-panel (opened)="panelOpened = true" (closed)="panelOpened = false">
+  <mat-expansion-panel [style.background]="backgroundColor" (opened)="panelOpened = true" (closed)="panelOpened = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{panelOpened? "Rating Details" :getProfessorName()}}
@@ -15,6 +15,10 @@
         <mat-card-subtitle>
           <span *ngFor="let course of professor.courses">{{course}}</span>
         </mat-card-subtitle>
+        <div class="rating">
+          <mat-progress-spinner [ngClass]="getSpinnerClass()" [diameter]="60" [mode]="'determinate'" [value]="spinnerValue"></mat-progress-spinner>
+          <div [ngClass]="professor.rating? 'rating-text': 'na-text'">{{professor.rating || "N/A"}}</div>
+        </div>
       </mat-card-header>
       <mat-card-content>
         <mat-card *ngIf="professor.evaluationOnsite">

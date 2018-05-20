@@ -3,17 +3,25 @@
     <h3>Profile</h3>
   </div>
   <div class="card-body">
-    <img src="{{profile?.picture}}" class="avatar" alt="avatar">
+    <!-- <img src="{{profile?.picture}}" class="avatar" alt="avatar"> -->
     <div>
       <mat-icon>people</mat-icon>
-      <h3 class="nickname">{{ profile?.nickname }}</h3>
+      <h3 class="nickname">user name</h3>
+      <!-- <h3 class="nickname">{{ profile?.nickname }}</h3> -->
     </div>
-    <pre class="full-profile">{{ profile | json }}</pre>
+    <!-- <pre class="full-profile">{{ profile | json }}</pre> -->
+    <pre>
+      Some 
+        User's
+          Information
+            And
+              Profile.  
+    </pre>
 
     <button mat-button (click)="loginMessage()">Get message</button>
     <div *ngIf="message">{{message}}</div>
 
-    <button mat-button (click)="apiTest()">Get article 1</button>
+    <button mat-button (click)="apiTest()">Get article</button>
     <div *ngIf="message">{{message}}</div>
   </div>
 </div>

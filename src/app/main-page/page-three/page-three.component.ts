@@ -40,35 +40,16 @@ export class PageThreeComponent implements OnInit {
 
     this.filteredProfessors = this.inputControl.valueChanges
       .pipe(
-        startWith(''),
-        map(input => this.professorsFilter(input))
+        startWith(""),
+        map(input => this.professorsFilter())
       );
   }
 
   onSortChange() {
-    switch (this.selectedSort) {
-      case "Course":
-        this.filteredProfessors = this.filteredProfessors
-          .pipe(
-            map(professors => professors.sort((a, b) => a.courses[0].localeCompare(b.courses[0])))
-          );
-        break;
-
-      case "Rating":
-        this.filteredProfessors = this.filteredProfessors
-          .pipe(
-            map(professors => professors.sort((a, b) => a.rating - b.rating))
-          );
-        break;
-
-      case "Name":
-        this.filteredProfessors = this.filteredProfessors
-          .pipe(
-            map(professors => professors.sort((a, b) => this.getProfessorName(a).localeCompare(this.getProfessorName(b))))
-          );
-      default:
-        break;
-    }
+    this.filteredProfessors = this.filteredProfessors
+      .pipe(
+        map(professors => this.sortProfessors(professors))
+      );
   }
 
   categoryAllChange() {
@@ -76,7 +57,7 @@ export class PageThreeComponent implements OnInit {
       this.category.fill(false);
       this.filteredProfessors = this.filteredProfessors
         .pipe(
-          map(professors => professors)
+          map(_ => this.professorsFilter(true))
         );
     }
   }
@@ -84,17 +65,49 @@ export class PageThreeComponent implements OnInit {
   categoryChange() {
     if (this.category.some(item => item)) {
       this.categoryAll = false;
+      this.categoryAllChange();
+
+      let checkedItems = [];
+      for (let index in this.category) {
+        if (this.category[index]) {
+          checkedItems.push(this.availableCourse[index]);
+        }
+      }
+
+      this.filteredProfessors = this.filteredProfessors
+        .pipe(
+          map(_ => this.professorsFilter(true)),
+          map(professors => professors.filter(professor => professor.courses.filter(course => checkedItems.includes(course.split(" ")[0])).length > 0))
+        );
     } else {
       this.categoryAll = true;
+      this.categoryAllChange();
     }
   }
 
-  private professorsFilter(input: string): Professor[] {
+  private professorsFilter(skipLog?: boolean): Professor[] {
+    let input = this.inputControl.value || "";
     let result = this.professors.filter(professor =>
-      this.getProfessorName(professor).toLowerCase().includes(input.toLowerCase())
-      || professor.courses.filter(course => course.toLowerCase().includes(input.toLowerCase())).length > 0);
-    this.log(`${result.length} professors found!`);
+      (this.getProfessorName(professor).toLowerCase().includes(input.toLowerCase())
+        || professor.courses.filter(course => course.toLowerCase().includes(input.toLowerCase())).length > 0));
+    result = this.sortProfessors(result);
+    if (!skipLog) {
+      this.log(`${result.length} professors found!`);
+    }
     return result;
+  }
+
+  sortProfessors(professors: Professor[]): Professor[] {
+    switch (this.selectedSort) {
+      case "Course":
+        return professors.sort((a, b) => a.courses[0].localeCompare(b.courses[0]));
+      case "Rating":
+        return professors.sort((a, b) => b.rating - a.rating);
+
+      case "Name":
+      default:
+        return professors.sort((a, b) => this.getProfessorName(a).localeCompare(this.getProfessorName(b)));
+    }
   }
 
   getProfessorName(professor: Professor): string {

@@ -1,4 +1,26 @@
 .header-image {
     background-image: url('/assets/img/avatar.png');
     background-size: cover;
-  }
+}
+
+.rating {
+  position: absolute;
+  right: 30px;
+  top: 15px;
+}
+
+.rating-text {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  font-size: large;
+  font-weight: bolder;
+}
+
+.na-text {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  font-size: large;
+  font-weight: bolder;
+}
