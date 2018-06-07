@@ -55,3 +55,14 @@
 .mat-progress-spinner.rating-5 circle {
     stroke: rgb(51, 255, 51);
 }
+
+.form-container {
+    margin-top: 1.5em;
+    width: 100%;
+    clear: both;
+}
+
+.form-container .mat-form-field{
+    width: 100%;
+    clear: both;
+}

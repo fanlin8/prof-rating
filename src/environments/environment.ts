@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  webServiceUrl: 'http://localhost:9091/'
+  // webServiceUrl: 'http://184.73.133.135:9090/'
 };
 
 /*

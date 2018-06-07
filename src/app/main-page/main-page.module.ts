@@ -16,6 +16,7 @@ import { MaterialModule } from '../material.module';
 import { ProfessorService } from '../services/professor.service';
 import { MessagesComponent } from '../utils/messages/messages.component';
 import { ProfessorCardComponent } from './page-three/professor-card/professor-card.component';
+import { RegisterService } from '../services/register.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ProfessorCardComponent } from './page-three/professor-card/professor-ca
   entryComponents: [
   ],
   providers: [
-    ProfessorService
+    ProfessorService,
+    RegisterService
   ],
 })
 export class MainPageModule { }

@@ -1,5 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
+import { UserImpl } from '../../models/userImpl';
 
 @Component({
   selector: 'app-user-page',
@@ -8,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserPageComponent implements OnInit {
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  user: UserImpl;
+  isLoading: boolean = true;
+
+  constructor(
+    private router: Router, 
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) { 
+    this.authService.getMe().subscribe( res => {
+      if (res) this.isLoading = false;
+    });
+  }
 
   ngOnInit() {
+    this.user = this.authService.currentUser;
   }
 
   private buttonToggled(value): void {
