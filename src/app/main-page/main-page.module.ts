@@ -17,6 +17,7 @@ import { ProfessorService } from '../services/professor.service';
 import { MessagesComponent } from '../utils/messages/messages.component';
 import { ProfessorCardComponent } from './page-three/professor-card/professor-card.component';
 import { RegisterService } from '../services/register.service';
+import { CourseService } from '../services/course.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { RegisterService } from '../services/register.service';
   entryComponents: [
   ],
   providers: [
+    CourseService,
     ProfessorService,
     RegisterService
   ],

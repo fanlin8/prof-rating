@@ -1,12 +1,9 @@
-export class Professor {
+export interface Professor {
 
     _id: string;
-    lastName: string;
-    middleName: string;
-    firstName: string;
-    courses: string[];
-    evaluationOnsite: string;
-    evaluationOnline: string;
-    rating: number
+    last_name: string;
+    middle_name: string;
+    first_name: string;
+    course: string[];
 
 }
