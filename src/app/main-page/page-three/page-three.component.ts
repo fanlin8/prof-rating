@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 import { ProfessorService } from '../../services/professor.service';
 import { Professor } from '../../models/professor';
-import { Observable, forkJoin as ObservableForkJoin, of as ObservableOf} from 'rxjs';
+import { Observable, forkJoin as ObservableForkJoin, of as ObservableOf } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { startWith, map, tap } from 'rxjs/operators';
 import { CourseService } from '../../services/course.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { DialogService } from '../../services/dialog/dialog.service';
 
 @Component({
   selector: 'app-page-three',
@@ -15,7 +17,7 @@ import { CourseService } from '../../services/course.service';
 export class PageThreeComponent implements OnInit {
 
   professors: Professor[];
-  filteredProfessors: Observable<Professor[]>
+  filteredProfessors: Observable<Professor[]>;
   availableCourse: string[];
 
   categoryAll: boolean = true;
@@ -26,9 +28,17 @@ export class PageThreeComponent implements OnInit {
   sortOptions: string[] = ["Name", "Rating", "Course"];
   selectedSort: string = "Name";
 
-  constructor(private messageService: MessageService, private professorService: ProfessorService, private courseService: CourseService) { }
+  constructor(
+    private messageService: MessageService,
+    public auth: AuthService,
+    private professorService: ProfessorService,
+    private courseService: CourseService,
+    private dialogService: DialogService,
+    private viewContainerRef: ViewContainerRef
+  ) { }
 
   ngOnInit() {
+    this.log(`If user logged in: ${this.auth.isLoggedIn()}`);
     // this.professorService.getProfessors().subscribe(professors => {
     //   this.professors = professors;
     // let availableCourseSet: Set<string> = new Set<string>();
@@ -50,11 +60,12 @@ export class PageThreeComponent implements OnInit {
     }
 
     ObservableForkJoin(courseOb, professorOb).subscribe(_ => {
-      // this.filteredProfessors = this.inputControl.valueChanges
-      // .pipe(
-      //   startWith(""),
-      //   map(input => this.professorsFilter())
-      // );
+      this.professors = this.professorService.professorsList;
+      this.filteredProfessors = this.inputControl.valueChanges
+        .pipe(
+          startWith(""),
+          map(_ => this.professorsFilter())
+        );
     });
   }
 
@@ -98,17 +109,17 @@ export class PageThreeComponent implements OnInit {
   //   }
   // }
 
-  // private professorsFilter(skipLog?: boolean): Professor[] {
-  //   let input = this.inputControl.value || "";
-  //   let result = this.professors.filter(professor =>
-  //     (this.getProfessorName(professor).toLowerCase().includes(input.toLowerCase())
-  //       || professor.courses.filter(course => course.toLowerCase().includes(input.toLowerCase())).length > 0));
-  //   result = this.sortProfessors(result);
-  //   if (!skipLog) {
-  //     this.log(`${result.length} professors found!`);
-  //   }
-  //   return result;
-  // }
+  private professorsFilter(skipLog?: boolean): Professor[] {
+    let input = this.inputControl.value || "";
+    let result = this.professors.filter(professor =>
+      (this.getProfessorName(professor).toLowerCase().includes(input.toLowerCase())
+        || professor.course.filter(course => this.courseService.coursesMap.get(course.toLowerCase()).course_code.includes(input.toLowerCase())).length > 0));
+    // result = this.sortProfessors(result);
+    if (!skipLog) {
+      this.log(`${result.length} professors found!`);
+    }
+    return result;
+  }
 
   // sortProfessors(professors: Professor[]): Professor[] {
   //   switch (this.selectedSort) {
@@ -129,6 +140,10 @@ export class PageThreeComponent implements OnInit {
       fullname += " " + professor.middle_name;
     }
     return fullname + " " + professor.last_name;
+  }
+
+  openReviewDialog(): void {
+    this.dialogService.openReviewDialog(this.viewContainerRef);
   }
 
   private log(message: string) {

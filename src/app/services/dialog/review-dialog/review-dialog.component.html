@@ -1,0 +1,36 @@
+<h4 mat-dialog-title>New Review</h4>
+<mat-dialog-content>
+  <div class="form-container">
+    <form [formGroup]="reviewForm">
+
+      <mat-form-field>
+        <input matInput placeholder="Professor" formControlName="professor" required>
+        <mat-error *ngIf="reviewForm.controls['professor'].hasError('required')">You must choose a Professor</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Course" formControlName="course" required>
+        <mat-error *ngIf="reviewForm.controls['course'].hasError('required')">You must choose an Course</mat-error>
+      </mat-form-field>
+
+      <bar-rating formControlName="rating" [theme]="'horizontal'" [max]="10" required></bar-rating>
+      <mat-error *ngIf="reviewForm.controls['rating'].hasError('required')">Rating is required.</mat-error>
+
+      <mat-form-field>
+        <textarea matInput placeholder="Review(Onsite)" [rows]="5" formControlName="review_onsite">
+        </textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput placeholder="Review(Online)" [rows]="5" formControlName="review_online">
+        </textarea>
+      </mat-form-field>
+
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onSubmitClick()" [disabled]="reviewForm.pristine || reviewForm.invalid">Submit</button>
+  <button mat-button color="primary" (click)="reset()" [disabled]="reviewForm.pristine">Clear</button>
+  <button mat-button color="warn" matDialogClose>Cancel</button>
+</mat-dialog-actions>

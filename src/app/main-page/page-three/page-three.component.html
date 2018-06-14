@@ -8,10 +8,10 @@
       <mat-drawer mode="side" opened="true" #sideDrawer>
         <div class="side-drawer">
             <mat-toolbar>Category</mat-toolbar>
-          <div class="drawer-content">
+          <!-- <div class="drawer-content">
             <mat-checkbox style="display: block" [(ngModel)]="categoryAll" (change)="categoryAllChange()">ALL</mat-checkbox>
             <mat-checkbox style="display: block" *ngFor="let course of availableCourse; let i = index" [(ngModel)]="category[i]" (change)="categoryChange()">{{course}}</mat-checkbox>
-          </div>
+          </div> -->
         </div>
       </mat-drawer>
       <mat-drawer-content>
@@ -30,11 +30,13 @@
               <mat-hint>Search a Rating!</mat-hint>
             </mat-form-field>
 
-            <mat-form-field>
+            <button mat-raised-button color="primary" *ngIf="auth.isLoggedIn()" (click)="openReviewDialog()">Write a Review</button>
+
+            <!-- <mat-form-field>
               <mat-select placeholder="Sort by" [(ngModel)]="selectedSort" (selectionChange)="onSortChange()">
                 <mat-option *ngFor="let option of sortOptions" [value]="option">{{option}}</mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
           </div>
         </div>
         <mat-divider></mat-divider>

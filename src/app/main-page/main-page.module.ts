@@ -18,6 +18,7 @@ import { MessagesComponent } from '../utils/messages/messages.component';
 import { ProfessorCardComponent } from './page-three/professor-card/professor-card.component';
 import { RegisterService } from '../services/register.service';
 import { CourseService } from '../services/course.service';
+import { DialogModule } from '../services/dialog/dialog.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CourseService } from '../services/course.service';
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    MainRoutingModule
+    MainRoutingModule,
+    DialogModule
   ],
   entryComponents: [
   ],
