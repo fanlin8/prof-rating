@@ -19,6 +19,7 @@ import { ProfessorCardComponent } from './page-three/professor-card/professor-ca
 import { RegisterService } from '../services/register.service';
 import { CourseService } from '../services/course.service';
 import { DialogModule } from '../services/dialog/dialog.module';
+import { ReviewService } from '../services/review.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { DialogModule } from '../services/dialog/dialog.module';
   providers: [
     CourseService,
     ProfessorService,
-    RegisterService
+    RegisterService,
+    ReviewService
   ],
 })
 export class MainPageModule { }

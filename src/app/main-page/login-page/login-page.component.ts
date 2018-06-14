@@ -84,7 +84,7 @@ export class LoginPageComponent implements OnInit {
     return this.authService.isLoggedIn();
   }
 
-  prepareNewUser(): User {
+  private prepareNewUser(): User {
     const formModel = this.registerForm.value;
 
     const newUser: User = {

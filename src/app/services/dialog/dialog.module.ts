@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DialogService } from "./dialog.service";
 import { ReviewDialogComponent } from './review-dialog/review-dialog.component';
 import { BarRatingModule } from "ngx-bar-rating";
+import { ReviewService } from "../review.service";
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { BarRatingModule } from "ngx-bar-rating";
   ],
   providers: [
     DialogService,
+    ReviewService
   ],
   entryComponents: [
     ReviewDialogComponent

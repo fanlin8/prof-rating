@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from '../../message.service';
+import { Review } from '../../../models/review';
+import { ReviewService } from '../../review.service';
 
 @Component({
   selector: 'app-review-dialog',
@@ -15,6 +17,7 @@ export class ReviewDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ReviewDialogComponent>,
     private fb: FormBuilder,
+    private reviewService: ReviewService,
     private messageService: MessageService) {
     this.createForm();
   }
@@ -32,7 +35,7 @@ export class ReviewDialogComponent implements OnInit {
       'course': ["", Validators.required],
       'review_onsite': [""],
       'review_online': [""],
-      'rating': [0, Validators.required]
+      'rating': [null, Validators.required]
     });
   }
 
@@ -42,7 +45,7 @@ export class ReviewDialogComponent implements OnInit {
       course: "",
       review_onsite: "",
       review_online: "",
-      rating: 0
+      rating: null
     });
   }
 
@@ -50,8 +53,32 @@ export class ReviewDialogComponent implements OnInit {
     this.rebuildForm();
   }
 
-  onSubmitClick() {
+  private prepareNewReview(): Review {
+    const formModel = this.reviewForm.value;
 
+    const newReview: Review = {
+      _id: null,
+      creator: null,
+      professor: formModel.professor as string,
+      course: formModel.course as string,
+      review_onsite: formModel.review_onsite as string,
+      review_online: formModel.review_online as string,
+      rating: formModel.rating as number,
+    };
+
+    return newReview;
+  }
+
+  onSubmitClick() {
+    this.log("Submitting new review...");
+    this.reviewService.submitNewReview(this.prepareNewReview()).subscribe(data => {
+      if(data) {
+        this.dialogRef.close();
+      } else {
+        this.log("Error while submitting!");
+        this.rebuildForm();
+      }
+    });
   }
 
 }
