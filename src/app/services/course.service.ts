@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GenericService } from './GenericService';
-import { Observable } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { Course } from '../models/course';
 import { tap, catchError } from 'rxjs/operators';
 import { MessageService } from './message.service';
@@ -23,6 +23,10 @@ export class CourseService extends GenericService {
   }
 
   getCourses(): Observable<Course[]> {
+    if (this.coursesList) {
+      return observableOf(this.coursesList);
+    }
+
     return this.http.get<Course[]>(this.coursesUrl)
       .pipe(
         tap(courses => {
