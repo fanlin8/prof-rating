@@ -49,18 +49,11 @@ export class PageThreeComponent implements OnInit {
     // this.category = new Array(this.availableCourse.length).fill(false);
     // });
 
-    let courseOb = ObservableOf(null);
-    if (!this.courseService.coursesList) {
-      courseOb = this.courseService.getCourses();
-    }
+    let courseOb = this.courseService.getCourses();
+    let professorOb = this.professorService.getProfessors();
 
-    let professorOb = ObservableOf(null);
-    if (!this.professorService.professorsList) {
-      professorOb = this.professorService.getProfessors();
-    }
-
-    ObservableForkJoin(courseOb, professorOb).subscribe(_ => {
-      this.professors = this.professorService.professorsList;
+    ObservableForkJoin(courseOb, professorOb).subscribe(res => {
+      this.professors = res[1];
       this.filteredProfessors = this.inputControl.valueChanges
         .pipe(
           startWith(""),

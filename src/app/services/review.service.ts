@@ -13,7 +13,11 @@ import { AuthService } from './auth/auth.service';
 export class ReviewService extends GenericService {
 
   private reviewsUrl: string = this.env.webServiceUrl + "reviews";
-  public reviewsList: Review[];
+  
+  private _reviewsList: Review[];
+  public get reviewsList(): Review[] {
+    return this._reviewsList;
+  }
 
   constructor(
     private http: HttpClient,

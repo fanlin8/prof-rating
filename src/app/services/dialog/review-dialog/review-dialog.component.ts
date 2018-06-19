@@ -4,6 +4,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from '../../message.service';
 import { Review } from '../../../models/review';
 import { ReviewService } from '../../review.service';
+import { ProfessorService } from '../../professor.service';
+import { Professor } from '../../../models/professor';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-review-dialog',
@@ -13,16 +17,31 @@ import { ReviewService } from '../../review.service';
 export class ReviewDialogComponent implements OnInit {
 
   reviewForm: FormGroup;
+  professors: Professor[];
+  filteredProfessors: Observable<Professor[]>;
 
   constructor(
     public dialogRef: MatDialogRef<ReviewDialogComponent>,
     private fb: FormBuilder,
     private reviewService: ReviewService,
+    private professorService: ProfessorService,
     private messageService: MessageService) {
     this.createForm();
   }
 
   ngOnInit() {
+    this.professors = this.professorService.professorsList;
+
+    this.filteredProfessors = this.reviewForm.controls['professor'].valueChanges
+      .pipe(
+        startWith(''),
+        map(val => this.filter(val))
+      );
+  }
+
+  filter(val: string): Professor[] {
+    return this.professors.filter(professor =>
+      this.getProfessorName(professor).toLowerCase().includes(val.toLowerCase()));
   }
 
   private log(message: string) {
@@ -72,13 +91,21 @@ export class ReviewDialogComponent implements OnInit {
   onSubmitClick() {
     this.log("Submitting new review...");
     this.reviewService.submitNewReview(this.prepareNewReview()).subscribe(data => {
-      if(data) {
+      if (data) {
         this.dialogRef.close();
       } else {
         this.log("Error while submitting!");
         this.rebuildForm();
       }
     });
+  }
+
+  getProfessorName(professor: Professor): string {
+    let fullname = professor.first_name;
+    if (professor.middle_name) {
+      fullname += " " + professor.middle_name;
+    }
+    return fullname + " " + professor.last_name;
   }
 
 }

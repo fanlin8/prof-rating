@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { MessageService } from "./message.service";
-import { Observable } from "rxjs";
+import { Observable, of as observableOf } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { Professor } from "../models/professor";
 import { GenericService } from "./GenericService";
@@ -12,7 +12,12 @@ import { GenericService } from "./GenericService";
 export class ProfessorService extends GenericService {
 
   private professorsUrl: string = this.env.webServiceUrl + "professors";
-  public professorsList: Professor[];
+  
+  private _professorsList: Professor[];
+  public get professorsList(): Professor[] {
+    return this._professorsList;
+  }
+
 
   constructor(
     private http: HttpClient,
@@ -23,11 +28,15 @@ export class ProfessorService extends GenericService {
   }
 
   getProfessors(): Observable<Professor[]> {
+    if (this._professorsList) {
+      return observableOf(this._professorsList);
+    }
+
     return this.http.get<Professor[]>(this.professorsUrl)
       .pipe(
         tap(professors => {
           this.log(`Professors DATA got with size ${professors.length}`);
-          this.professorsList = professors;
+          this._professorsList = professors;
         }),
         catchError(this.handleError("getProfessors()", []))
       );

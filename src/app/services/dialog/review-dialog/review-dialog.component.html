@@ -4,9 +4,15 @@
     <form [formGroup]="reviewForm">
 
       <mat-form-field>
-        <input matInput placeholder="Professor" formControlName="professor" required>
+        <input matInput placeholder="Professor" formControlName="professor" [matAutocomplete]="profAuto" required>
         <mat-error *ngIf="reviewForm.controls['professor'].hasError('required')">You must choose a Professor</mat-error>
       </mat-form-field>
+
+      <mat-autocomplete #profAuto="matAutocomplete">
+        <mat-option *ngFor="let professor of filteredProfessors | async" [value]="professor">
+          {{getProfessorName(professor)}}
+        </mat-option>
+      </mat-autocomplete>
 
       <mat-form-field>
         <input matInput placeholder="Course" formControlName="course" required>

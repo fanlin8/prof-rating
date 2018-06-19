@@ -12,8 +12,12 @@ import { HttpClient } from '@angular/common/http';
 export class CourseService extends GenericService {
 
   private coursesUrl: string = this.env.webServiceUrl + "courses";
-  public coursesList: Course[];
-  public coursesMap: Map<string, Course> = new Map<string, Course>();
+  private coursesList: Course[];
+  
+  private _coursesMap: Map<string, Course> = new Map<string, Course>();
+  public get coursesMap(): Map<string, Course> {
+    return this._coursesMap;
+  }
 
   constructor(
     private http: HttpClient,
@@ -32,7 +36,7 @@ export class CourseService extends GenericService {
         tap(courses => {
           this.log(`Courses DATA got with size ${courses.length}`);
           this.coursesList = courses;
-          this.coursesList.forEach(course => this.coursesMap.set(course._id, course));
+          this.coursesList.forEach(course => this._coursesMap.set(course._id, course));
         }),
         catchError(this.handleError("getCourses()", []))
       );
