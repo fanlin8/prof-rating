@@ -20,13 +20,13 @@ export class PageThreeComponent implements OnInit {
   filteredProfessors: Observable<Professor[]>;
   availableCourse: string[];
 
-  categoryAll: boolean = true;
+  categoryAll = true;
   category: boolean[];
 
   inputControl: FormControl = new FormControl();
 
-  sortOptions: string[] = ["Name", "Rating", "Course"];
-  selectedSort: string = "Name";
+  sortOptions: string[] = ['Name', 'Rating', 'Course'];
+  selectedSort = 'Name';
 
   constructor(
     private messageService: MessageService,
@@ -49,14 +49,14 @@ export class PageThreeComponent implements OnInit {
     // this.category = new Array(this.availableCourse.length).fill(false);
     // });
 
-    let courseOb = this.courseService.getCourses();
-    let professorOb = this.professorService.getProfessors();
+    const courseOb = this.courseService.getCourses();
+    const professorOb = this.professorService.getProfessors();
 
     ObservableForkJoin(courseOb, professorOb).subscribe(res => {
-      this.professors = res[1];
+      this.professors = this.professorService.getProfessorsWithCourses();
       this.filteredProfessors = this.inputControl.valueChanges
         .pipe(
-          startWith(""),
+          startWith(''),
           map(_ => this.professorsFilter())
         );
     });
@@ -94,7 +94,8 @@ export class PageThreeComponent implements OnInit {
   //     this.filteredProfessors = this.filteredProfessors
   //       .pipe(
   //         map(_ => this.professorsFilter(true)),
-  //         map(professors => professors.filter(professor => professor.courses.filter(course => checkedItems.includes(course.split(" ")[0])).length > 0))
+  //         map(professors => professors.filter(
+  //   professor => professor.courses.filter(course => checkedItems.includes(course.split(" ")[0])).length > 0))
   //       );
   //   } else {
   //     this.categoryAll = true;
@@ -103,10 +104,11 @@ export class PageThreeComponent implements OnInit {
   // }
 
   private professorsFilter(skipLog?: boolean): Professor[] {
-    let input = this.inputControl.value || "";
-    let result = this.professors.filter(professor =>
+    const input = this.inputControl.value || '';
+    const result = this.professors.filter(professor =>
       (this.getProfessorName(professor).toLowerCase().includes(input.toLowerCase())
-        || professor.course.filter(course => this.courseService.coursesMap.get(course.toLowerCase()).course_code.includes(input.toLowerCase())).length > 0));
+        || professor.course.filter(
+          course => this.courseService.coursesMap.get(course.toLowerCase()).course_code.includes(input.toLowerCase())).length > 0));
     // result = this.sortProfessors(result);
     if (!skipLog) {
       this.log(`${result.length} professors found!`);
@@ -130,9 +132,9 @@ export class PageThreeComponent implements OnInit {
   getProfessorName(professor: Professor): string {
     let fullname = professor.first_name;
     if (professor.middle_name) {
-      fullname += " " + professor.middle_name;
+      fullname += ' ' + professor.middle_name;
     }
-    return fullname + " " + professor.last_name;
+    return fullname + ' ' + professor.last_name;
   }
 
   openReviewDialog(): void {
@@ -140,7 +142,7 @@ export class PageThreeComponent implements OnInit {
   }
 
   private log(message: string) {
-    this.messageService.add("PageThreeComponent: " + message);
+    this.messageService.add('PageThreeComponent: ' + message);
   }
 
 }

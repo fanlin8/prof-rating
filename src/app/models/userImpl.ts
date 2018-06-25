@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { User } from './user';
 
 export class UserImpl implements User {
 
@@ -8,6 +8,6 @@ export class UserImpl implements User {
     password: string;
     roles: string[];
 
-    auth: boolean = false;
+    auth = false;
     token: string;
 }

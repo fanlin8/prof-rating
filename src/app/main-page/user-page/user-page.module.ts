@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { UserBoardComponent } from "./user-board/user-board.component";
-import { UserRoutingModule } from "./user-routing.module";
+import { UserBoardComponent } from './user-board/user-board.component';
+import { UserRoutingModule } from './user-routing.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MaterialModule } from 'src/app/material.module';
 

@@ -11,15 +11,17 @@ import { UserImpl } from '../../models/userImpl';
 export class UserPageComponent implements OnInit {
 
   user: UserImpl;
-  isLoading: boolean = true;
+  isLoading = true;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService
-  ) { 
-    this.authService.getMe().subscribe( res => {
-      if (res) this.isLoading = false;
+  ) {
+    this.authService.getMe().subscribe(res => {
+      if (res) {
+        this.isLoading = false;
+      }
     });
   }
 

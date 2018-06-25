@@ -16,13 +16,13 @@ const httpOptions = {
 })
 export class RegisterService extends GenericService {
 
-  private url: string = environment.webServiceUrl + "register";
+  private url: string = environment.webServiceUrl + 'register';
 
   constructor(
     private http: HttpClient,
     messageService: MessageService) {
     super(messageService);
-    this.messagePrefix = "RegisterService";
+    this.messagePrefix = 'RegisterService';
   }
 
   register(user: User): Observable<any> {

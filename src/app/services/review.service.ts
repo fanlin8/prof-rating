@@ -12,8 +12,7 @@ import { AuthService } from './auth/auth.service';
 })
 export class ReviewService extends GenericService {
 
-  private reviewsUrl: string = this.env.webServiceUrl + "reviews";
-  
+  private reviewsUrl: string = this.env.webServiceUrl + 'reviews';
   private _reviewsList: Review[];
   public get reviewsList(): Review[] {
     return this._reviewsList;
@@ -24,7 +23,7 @@ export class ReviewService extends GenericService {
     private auth: AuthService,
     messageService: MessageService) {
     super(messageService);
-    this.messagePrefix = "ReviewService";
+    this.messagePrefix = 'ReviewService';
   }
 
   submitNewReview(review: Review): Observable<any> {

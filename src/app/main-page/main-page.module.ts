@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { PageOneComponent } from './page-one/page-one.component';
 import { PageTwoComponent } from './page-two/page-two.component';
 import { PageThreeComponent } from './page-three/page-three.component';
-import { MainRoutingModule } from "./main-routing.module";
+import { MainRoutingModule } from './main-routing.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { InfoPageComponent } from './info-page/info-page.component';
@@ -20,6 +20,7 @@ import { RegisterService } from '../services/register.service';
 import { CourseService } from '../services/course.service';
 import { DialogModule } from '../services/dialog/dialog.module';
 import { ReviewService } from '../services/review.service';
+import { ReviewCardComponent } from './page-three/review-card/review-card.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ReviewService } from '../services/review.service';
     InfoPageComponent,
     CallBackComponent,
     MessagesComponent,
-    ProfessorCardComponent
+    ProfessorCardComponent,
+    ReviewCardComponent
   ],
   imports: [
     FormsModule,

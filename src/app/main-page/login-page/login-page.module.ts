@@ -3,8 +3,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 
-import { LoginPageComponent } from "./login-page.component";
-import { LoginRoutingModule } from "./login-routing.module";
+import { LoginPageComponent } from './login-page.component';
+import { LoginRoutingModule } from './login-routing.module';
 import { MaterialModule } from 'src/app/material.module';
 
 @NgModule({

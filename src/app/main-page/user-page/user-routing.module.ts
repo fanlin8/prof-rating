@@ -1,8 +1,8 @@
 import { UserPageComponent } from './user-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { UserBoardComponent } from "./user-board/user-board.component";
-import { UserProfileComponent } from "./user-profile/user-profile.component";
+import { UserBoardComponent } from './user-board/user-board.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthGuardService } from 'src/app/services/auth/auth-guard.service';
 
 const userRoutes: Routes = [
@@ -16,7 +16,7 @@ const userRoutes: Routes = [
       { path: 'profile', component: UserProfileComponent },
     ]
   },
-]
+];
 
 @NgModule({
   imports: [

@@ -16,8 +16,8 @@ export class LoginPageComponent implements OnInit {
   message: string;
   registerForm: FormGroup;
   loginForm: FormGroup;
-  hidePassword: boolean = true;
-  hasLoginError: boolean = false;
+  hidePassword = true;
+  hasLoginError = false;
 
   constructor(private authService: AuthService, private registerService: RegisterService, public router: Router,
     private fb: FormBuilder, private messageService: MessageService) {
@@ -26,27 +26,27 @@ export class LoginPageComponent implements OnInit {
   }
 
   private log(message: string) {
-    this.messageService.add("LoginPageComponent: " + message);
+    this.messageService.add('LoginPageComponent: ' + message);
   }
 
   private createForm() {
     this.loginForm = this.fb.group({
-      'email': ["", [Validators.required, Validators.email]],
-      'password': ["", Validators.required],
+      'email': ['', [Validators.required, Validators.email]],
+      'password': ['', Validators.required],
     });
 
     this.registerForm = this.fb.group({
-      'username': ["", Validators.required],
-      'email': ["", [Validators.required, Validators.email]],
-      'password': ["", [Validators.required, Validators.minLength(6)]],
+      'username': ['', Validators.required],
+      'email': ['', [Validators.required, Validators.email]],
+      'password': ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
   private rebuildForm() {
     this.registerForm.reset({
-      username: "",
-      email: "",
-      password: ""
+      username: '',
+      email: '',
+      password: ''
     });
   }
 
@@ -69,7 +69,7 @@ export class LoginPageComponent implements OnInit {
         if (this.authService.isLoggedIn()) {
           // Get the redirect URL from our auth service
           // If no redirect has been set, use the default
-          let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/main';
+          const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/main';
 
           // Redirect the user
           this.router.navigate([redirect]);

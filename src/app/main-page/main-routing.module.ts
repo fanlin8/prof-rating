@@ -30,7 +30,7 @@ const mainRoutes: Routes = [
       },
     ]
   },
-]
+];
 
 @NgModule({
   imports: [

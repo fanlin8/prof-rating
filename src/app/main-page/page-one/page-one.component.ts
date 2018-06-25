@@ -14,7 +14,7 @@ export class PageOneComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    var mapProp = {
+    const mapProp = {
       center: new google.maps.LatLng(40.262053, -76.8765557),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP

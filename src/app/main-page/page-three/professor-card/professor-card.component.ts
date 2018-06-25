@@ -11,11 +11,11 @@ export class ProfessorCardComponent implements OnInit {
   @Input()
   professor: Professor;
 
-  panelOpened: boolean = false;
+  panelOpened = false;
   filterInput: string;
 
-  backgroundColor: string = "white";
-  spinnerValue: number = 100;
+  backgroundColor = 'white';
+  spinnerValue = 100;
 
   constructor() { }
 

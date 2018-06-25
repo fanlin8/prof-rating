@@ -14,8 +14,8 @@ const httpOptions = {
 @Injectable()
 export class AuthService {
   currentUser: UserImpl = new UserImpl();
-  private url: string = environment.webServiceUrl + "login";
-  private getMeUrl: string = environment.webServiceUrl + "me";
+  private url: string = environment.webServiceUrl + 'login';
+  private getMeUrl: string = environment.webServiceUrl + 'me';
 
   // store the URL so we can redirect after logging in
   redirectUrl: string;
@@ -24,14 +24,14 @@ export class AuthService {
     private router: Router,
     private http: HttpClient,
     private messageService: MessageService) {
-      if(this.isLoggedIn()){
-        this.currentUser.auth = true;
-        this.currentUser.token = localStorage.getItem('HU-currentUser');
-      }
+    if (this.isLoggedIn()) {
+      this.currentUser.auth = true;
+      this.currentUser.token = localStorage.getItem('HU-currentUser');
+    }
   }
 
   private log(message: string) {
-    this.messageService.add("AuthService: " + message);
+    this.messageService.add('AuthService: ' + message);
   }
 
   login(email: string, password: string): Observable<any> {
@@ -50,12 +50,12 @@ export class AuthService {
   logout(): void {
     this.currentUser = new UserImpl();
     localStorage.removeItem('HU-currentUser');
-    this.log("Logged Out.")
+    this.log('Logged Out.');
   }
 
   getMe(): Observable<any> {
     if (this.currentUser.auth) {
-      let getMeOptions = {
+      const getMeOptions = {
         headers: new HttpHeaders({ 'x-access-token': this.currentUser.token })
       };
       return this.http.get<UserImpl>(this.getMeUrl, getMeOptions).pipe(
@@ -67,16 +67,16 @@ export class AuthService {
         catchError(this.handleError<any>(`getting information for email=${this.currentUser.email}`))
       );
     } else {
-      this.log("Not logged in!!!");
+      this.log('Not logged in!!!');
       return of(null);
     }
   }
 
   isLoggedIn(): boolean {
     return localStorage.getItem('HU-currentUser') != null;
-}
+  }
 
-  private handleError<T>(operation = "operation", result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       this.log(`${operation} failed: ${error.error.message || error.message}`);

@@ -4,6 +4,6 @@ export interface Professor {
     last_name: string;
     middle_name: string;
     first_name: string;
-    course: string[];
+    course: any[];
 
 }
