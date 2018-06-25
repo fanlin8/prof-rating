@@ -93,12 +93,18 @@ export class ReviewDialogComponent implements OnInit {
 
   private prepareNewReview(): Review {
     const formModel = this.reviewForm.value;
+    const professorId = this.professorService.professorsList.find(
+      prof => this.getProfessorName(prof) === formModel.professor as string
+    )._id;
+    const courseId = this.courseService.coursesList.find(
+      course => course.course_code === formModel.course as string
+    )._id;
 
     const newReview: Review = {
       _id: undefined,
       creator: undefined,
-      professor: formModel.professor as string,
-      course: formModel.course as string,
+      professor: professorId,
+      course: courseId,
       review_onsite: formModel.review_onsite as string,
       review_online: formModel.review_online as string,
       rating: formModel.rating as number,

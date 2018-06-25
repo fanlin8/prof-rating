@@ -29,13 +29,15 @@
       <mat-error *ngIf="!reviewForm.pristine && reviewForm.controls['rating'].hasError('required')">Rating is required.</mat-error>
 
       <mat-form-field>
-        <textarea matInput placeholder="Review(Onsite)" [rows]="5" formControlName="review_onsite">
+        <textarea matInput placeholder="Review(Onsite)" [rows]="5" formControlName="review_onsite" #onsite>
         </textarea>
+        <mat-hint align="end">{{onsite.value.length}} characters</mat-hint>
       </mat-form-field>
 
       <mat-form-field>
-        <textarea matInput placeholder="Review(Online)" [rows]="5" formControlName="review_online">
+        <textarea matInput placeholder="Review(Online)" [rows]="5" formControlName="review_online" #online>
         </textarea>
+        <mat-hint align="end">{{online.value.length}} characters</mat-hint>
       </mat-form-field>
 
     </form>
