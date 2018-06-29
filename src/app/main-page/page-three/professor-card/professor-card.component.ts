@@ -1,5 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Professor } from '../../../models/professor';
+import { MessageService } from '../../../services/message.service';
+import { ReviewService } from '../../../services/review.service';
+import { map } from 'rxjs/operators';
+import { CourseReviewsModel } from '../../../models/CourseReviewsModel';
+import { CourseService } from '../../../services/course.service';
 
 @Component({
   selector: 'app-professor-card',
@@ -11,13 +16,24 @@ export class ProfessorCardComponent implements OnInit {
   @Input()
   professor: Professor;
 
+  dataLoaded = false;
   panelOpened = false;
+
+  courseReviewsMap = new Map<string, CourseReviewsModel>();
+
   filterInput: string;
 
-  backgroundColor = 'white';
   spinnerValue = 100;
 
-  constructor() { }
+  constructor(
+    private messageService: MessageService,
+    private reviewService: ReviewService,
+    private courseService: CourseService
+  ) { }
+
+  private log(message: string) {
+    this.messageService.add('PageThreeComponent: ' + message);
+  }
 
   ngOnInit() {
     // this.backgroundColor = "rgba(" + this.getColor() + ", 0.25)";
@@ -28,18 +44,18 @@ export class ProfessorCardComponent implements OnInit {
   }
 
   // getSpinnerClass():string {
-    // let rating = this.professor.rating;
-    // switch (true) {
-    //   case rating <= 1:
-    //     return "rating-1";
-    //   case rating <= 2:
-    //     return "rating-2";
-    //   case rating <= 3:
-    //     return "rating-3";
-    //   case rating <= 4:
-    //     return "rating-4";
-    //   case rating <= 5:
-    //     return "rating-5";
+  // let rating = this.professor.rating;
+  // switch (true) {
+  //   case rating <= 1:
+  //     return "rating-1";
+  //   case rating <= 2:
+  //     return "rating-2";
+  //   case rating <= 3:
+  //     return "rating-3";
+  //   case rating <= 4:
+  //     return "rating-4";
+  //   case rating <= 5:
+  //     return "rating-5";
 
   //     default:
   //       return "";
@@ -65,12 +81,42 @@ export class ProfessorCardComponent implements OnInit {
   //   }
   // }
 
-  // getProfessorName(): string {
-  //   let fullname = this.professor.firstName;
-  //   if (this.professor.middleName) {
-  //     fullname += " " + this.professor.middleName;
-  //   }
-  //   return fullname + " " + this.professor.lastName;
-  // }
+  onOpen() {
+    this.panelOpened = true;
+    if (!this.dataLoaded) {
+      this.reviewService.getReviewsByProfessorId(this.professor._id).pipe(map(reviews => {
+        reviews.forEach(review => {
+          const model = this.courseReviewsMap.get(review.course);
+          if (model) {
+            model.reviewsOnline.push(review.review_online);
+            model.reviewsOnsite.push(review.review_onsite);
+          } else {
+            const newModel = new CourseReviewsModel();
+            newModel.professorId = review.professor;
+            newModel.courseId = review.course;
+            newModel.courseCode = this.courseService.coursesMap.get(review.course).course_code;
+            newModel.reviewsOnline = [review.review_online];
+            newModel.reviewsOnsite = [review.review_onsite];
+            this.courseReviewsMap.set(review.course, newModel);
+          }
+        });
+      }
+      )).subscribe(_ => {
+        this.dataLoaded = true;
+      });
+    }
+  }
+
+  getKeys(aMap): Array<string> {
+    return Array.from(aMap.keys());
+  }
+
+  getProfessorName(): string {
+    let fullname = this.professor.first_name;
+    if (this.professor.middle_name) {
+      fullname += ' ' + this.professor.middle_name;
+    }
+    return fullname + ' ' + this.professor.last_name;
+  }
 
 }

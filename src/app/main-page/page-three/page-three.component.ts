@@ -106,9 +106,12 @@ export class PageThreeComponent implements OnInit {
   private professorsFilter(skipLog?: boolean): Professor[] {
     const input = this.inputControl.value || '';
     const result = this.professors.filter(professor =>
-      (this.getProfessorName(professor).toLowerCase().includes(input.toLowerCase())
-        || professor.course.filter(
-          course => this.courseService.coursesMap.get(course.toLowerCase()).course_code.includes(input.toLowerCase())).length > 0));
+      this.getProfessorName(professor).toLowerCase().includes(input.toLowerCase())
+      || professor.course.some(course => {
+        if (course) {
+          return course.course_code.toLowerCase().includes(input.toLowerCase());
+        }
+      }));
     // result = this.sortProfessors(result);
     if (!skipLog) {
       this.log(`${result.length} professors found!`);

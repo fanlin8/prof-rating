@@ -3,7 +3,7 @@ import { GenericService } from './GenericService';
 import { Review } from '../models/review';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MessageService } from './message.service';
-import { Observable } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { AuthService } from './auth/auth.service';
 
@@ -16,6 +16,11 @@ export class ReviewService extends GenericService {
   private _reviewsList: Review[];
   public get reviewsList(): Review[] {
     return this._reviewsList;
+  }
+
+  private _professorReviewsMap = new Map<string, Review[]>();
+  public get professorReviewsMap(): Map<string, Review[]> {
+    return this._professorReviewsMap;
   }
 
   constructor(
@@ -35,5 +40,20 @@ export class ReviewService extends GenericService {
       tap(resultJSON => this.log(`Succesfully created review with id ${resultJSON._id}`)),
       catchError(this.handleError<any>(`creating review`))
     );
+  }
+
+  getReviewsByProfessorId(id: string): Observable<Review[]> {
+    if (this.professorReviewsMap.get(id)) {
+      return observableOf(this.professorReviewsMap.get(id));
+    }
+
+    return this.http.get<Review[]>(this.reviewsUrl + '/' + id)
+      .pipe(
+        tap(reviews => {
+          this.log(`Reviews DATA got with size ${reviews.length}`);
+          this.professorReviewsMap.set(id, reviews);
+        }),
+        catchError(this.handleError('getReviewsByProfessorId()', []))
+      );
   }
 }

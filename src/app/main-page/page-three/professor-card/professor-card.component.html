@@ -1,27 +1,43 @@
 <mat-accordion>
-  <mat-expansion-panel [style.background]="backgroundColor" (opened)="panelOpened = true" (closed)="panelOpened = false">
+  <mat-expansion-panel (opened)="onOpen()" (closed)="panelOpened = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{panelOpened? "Rating Details" :'getProfessorName()'}}
+        {{panelOpened? "Rating Details" : getProfessorName()}}
       </mat-panel-title>
-      <mat-panel-description>
+      <!-- <mat-panel-description>
         {{panelOpened ? '' : 'professor.courses[0]'}}
-      </mat-panel-description>
+      </mat-panel-description> -->
     </mat-expansion-panel-header>
-    <mat-card>
-      <mat-card-header>
-        <!-- <div mat-card-avatar class="header-image"></div>
-        <mat-card-title>{{getProfessorName()}}</mat-card-title>
-        <mat-card-subtitle>
-          <span *ngFor="let course of professor.courses">{{course}}</span>
-        </mat-card-subtitle>
-        <div class="rating">
-          <mat-progress-spinner [ngClass]="getSpinnerClass()" [diameter]="60" [mode]="'determinate'" [value]="spinnerValue"></mat-progress-spinner>
-          <div [ngClass]="professor.rating? 'rating-text': 'na-text'">{{professor.rating || "N/A"}}</div>
-        </div> -->
-      </mat-card-header>
-      <mat-card-content>
-        <!-- <mat-card *ngIf="professor.evaluationOnsite">
+    <ng-template matExpansionPanelContent>
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar class="header-image"></div>
+          <mat-card-title>{{getProfessorName()}}</mat-card-title>
+          <mat-card-subtitle>
+            <span>Professor Description goes here.</span>
+          </mat-card-subtitle>
+          <div class="rating">
+            <mat-progress-spinner [diameter]="60" [mode]="'determinate'" [value]="spinnerValue"></mat-progress-spinner>
+            <div [ngClass]="'rating-text'">Rating?</div>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-tab-group *ngIf="dataLoaded; else loadingTemplate" mat-stretch-tabs headerPosition="below">
+            <mat-tab *ngFor="let key of getKeys(courseReviewsMap)" label="{{courseReviewsMap.get(key).courseCode}}">
+              <mat-list>
+                <h3 mat-subheader>Reviews Onsite</h3>
+                <mat-list-item *ngFor="let reviewOnsite of courseReviewsMap.get(key).reviewsOnsite">
+                  {{reviewOnsite}}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>Reviews Online</h3>
+                <mat-list-item *ngFor="let reviewOnline of courseReviewsMap.get(key).reviewsOnline">
+                  {{reviewOnline}}
+                </mat-list-item>
+              </mat-list>
+            </mat-tab>
+          </mat-tab-group>
+          <!-- <mat-card *ngIf="professor.evaluationOnsite">
           <mat-card-subtitle>On Site</mat-card-subtitle>
           <mat-card-content>{{professor.evaluationOnsite}}</mat-card-content>
         </mat-card>
@@ -29,16 +45,20 @@
           <mat-card-subtitle>Online</mat-card-subtitle>
           <mat-card-content>{{professor.evaluationOnline}}</mat-card-content>
         </mat-card> -->
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-icon-button color="primary">
-          <mat-icon matTooltip="Like" [matTooltipPosition]="'above'">favorite</mat-icon>
-        </button>
-        <button mat-icon-button color="warn">
-          <mat-icon matTooltip="So-So" [matTooltipPosition]="'above'">sentiment_dissatisfied</mat-icon>
-        </button>
-        <button mat-button color="primary">Comments</button>
-      </mat-card-actions>
-    </mat-card>
+          <ng-template #loadingTemplate>
+            <mat-progress-bar mode="query"></mat-progress-bar>
+          </ng-template>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button color="primary">
+            <mat-icon matTooltip="Like" [matTooltipPosition]="'above'">favorite</mat-icon>
+          </button>
+          <button mat-icon-button color="warn">
+            <mat-icon matTooltip="So-So" [matTooltipPosition]="'above'">sentiment_dissatisfied</mat-icon>
+          </button>
+          <button mat-button color="primary">Comments</button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-template>
   </mat-expansion-panel>
 </mat-accordion>
