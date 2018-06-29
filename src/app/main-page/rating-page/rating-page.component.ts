@@ -10,11 +10,11 @@ import { AuthService } from '../../services/auth/auth.service';
 import { DialogService } from '../../services/dialog/dialog.service';
 
 @Component({
-  selector: 'app-page-three',
-  templateUrl: './page-three.component.html',
-  styleUrls: ['./page-three.component.css']
+  selector: 'app-rating-page',
+  templateUrl: './rating-page.component.html',
+  styleUrls: ['./rating-page.component.css']
 })
-export class PageThreeComponent implements OnInit {
+export class RatingPageComponent implements OnInit {
 
   professors: Professor[];
   filteredProfessors: Observable<Professor[]>;
@@ -25,8 +25,9 @@ export class PageThreeComponent implements OnInit {
 
   inputControl: FormControl = new FormControl();
 
-  sortOptions: string[] = ['Name', 'Rating', 'Course'];
-  selectedSort = 'Name';
+  // sortOptions: string[] = ['Name', 'Rating', 'Course'];
+  sortOptions: string[] = ['Name'];
+  selectedSort = '';
 
   constructor(
     private messageService: MessageService,
@@ -62,12 +63,12 @@ export class PageThreeComponent implements OnInit {
     });
   }
 
-  // onSortChange() {
-  //   this.filteredProfessors = this.filteredProfessors
-  //     .pipe(
-  //       map(professors => this.sortProfessors(professors))
-  //     );
-  // }
+  onSortChange() {
+    this.filteredProfessors = this.filteredProfessors
+      .pipe(
+        map(professors => this.sortProfessors(professors))
+      );
+  }
 
   // categoryAllChange() {
   //   if (this.categoryAll) {
@@ -119,18 +120,18 @@ export class PageThreeComponent implements OnInit {
     return result;
   }
 
-  // sortProfessors(professors: Professor[]): Professor[] {
-  //   switch (this.selectedSort) {
-  //     case "Course":
-  //       return professors.sort((a, b) => a.courses[0].localeCompare(b.courses[0]));
-  //     case "Rating":
-  //       return professors.sort((a, b) => b.rating - a.rating);
+  sortProfessors(professors: Professor[]): Professor[] {
+    switch (this.selectedSort) {
+      // case "Course":
+      //   return professors.sort((a, b) => a.courses[0].localeCompare(b.courses[0]));
+      // case "Rating":
+      //   return professors.sort((a, b) => b.rating - a.rating);
 
-  //     case "Name":
-  //     default:
-  //       return professors.sort((a, b) => this.getProfessorName(a).localeCompare(this.getProfessorName(b)));
-  //   }
-  // }
+      case 'Name':
+      default:
+        return professors.sort((a, b) => this.getProfessorName(a).localeCompare(this.getProfessorName(b)));
+    }
+  }
 
   getProfessorName(professor: Professor): string {
     let fullname = professor.first_name;
@@ -145,7 +146,7 @@ export class PageThreeComponent implements OnInit {
   }
 
   private log(message: string) {
-    this.messageService.add('PageThreeComponent: ' + message);
+    this.messageService.add('RatingPageComponent: ' + message);
   }
 
 }

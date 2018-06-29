@@ -7,12 +7,12 @@
     Information
   </button>
   <mat-menu #pagesMenu="matMenu">
-    <button mat-menu-item routerLink="page-one" routerLinkActive="active">Hotel & Parking</button>
-    <button mat-menu-item routerLink="page-two" routerLinkActive="active">Resources</button>
+    <button mat-menu-item routerLink="travel-page" routerLinkActive="active">Hotel & Parking</button>
+    <button mat-menu-item routerLink="resource-page" routerLinkActive="active">Resources</button>
     <button disabled mat-menu-item routerLink="" routerLinkActive="active">Disabled</button>
   </mat-menu>
 
-  <button mat-button [ngClass]="'nav-button'" routerLink="page-three" routerLinkActive="active">Rating</button>
+  <button mat-button [ngClass]="'nav-button'" routerLink="rating-page" routerLinkActive="active">Rating</button>
 
   <div [ngClass]="'end-buttons'">
     <button mat-button routerLink="user" *ngIf="isLoggedIn()" routerLinkActive="active">

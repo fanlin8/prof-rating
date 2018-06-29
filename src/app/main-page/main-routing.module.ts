@@ -1,7 +1,6 @@
-import { UserPageComponent } from './user-page/user-page.component';
-import { PageThreeComponent } from './page-three/page-three.component';
-import { PageTwoComponent } from './page-two/page-two.component';
-import { PageOneComponent } from './page-one/page-one.component';
+import { RatingPageComponent } from './rating-page/rating-page.component';
+import { ResourcePageComponent } from './resource-page/resource-page.component';
+import { TravelPageComponent } from './travel-page/travel-page.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -14,9 +13,9 @@ const mainRoutes: Routes = [
     path: '', component: MainPageComponent,
     children: [
       { path: '', component: InfoPageComponent },
-      { path: 'page-one', component: PageOneComponent },
-      { path: 'page-two', component: PageTwoComponent },
-      { path: 'page-three', component: PageThreeComponent },
+      { path: 'travel-page', component: TravelPageComponent },
+      { path: 'resource-page', component: ResourcePageComponent },
+      { path: 'rating-page', component: RatingPageComponent },
       { path: 'callback', component: CallBackComponent },
 
       {

@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { } from '@types/googlemaps';
 
 @Component({
-  selector: 'app-page-one',
-  templateUrl: './page-one.component.html',
-  styleUrls: ['./page-one.component.css']
+  selector: 'app-travel-page',
+  templateUrl: './travel-page.component.html',
+  styleUrls: ['./travel-page.component.css']
 })
-export class PageOneComponent implements OnInit {
+export class TravelPageComponent implements OnInit {
 
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;

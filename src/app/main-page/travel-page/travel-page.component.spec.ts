@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageTwoComponent } from './page-two.component';
+import { TravelPageComponent } from './travel-page.component';
 
-describe('PageTwoComponent', () => {
-  let component: PageTwoComponent;
-  let fixture: ComponentFixture<PageTwoComponent>;
+describe('TravelPageComponent', () => {
+  let component: TravelPageComponent;
+  let fixture: ComponentFixture<TravelPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageTwoComponent ]
+      declarations: [ TravelPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PageTwoComponent);
+    fixture = TestBed.createComponent(TravelPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

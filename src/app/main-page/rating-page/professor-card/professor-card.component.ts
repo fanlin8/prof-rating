@@ -32,7 +32,7 @@ export class ProfessorCardComponent implements OnInit {
   ) { }
 
   private log(message: string) {
-    this.messageService.add('PageThreeComponent: ' + message);
+    this.messageService.add('RatingPageComponent: ' + message);
   }
 
   ngOnInit() {
