@@ -4,7 +4,7 @@ import { ProfessorService } from '../../services/professor.service';
 import { Professor } from '../../models/professor';
 import { Observable, forkJoin as ObservableForkJoin, of as ObservableOf } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { startWith, map, tap } from 'rxjs/operators';
+import { startWith, map } from 'rxjs/operators';
 import { CourseService } from '../../services/course.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { DialogService } from '../../services/dialog/dialog.service';
@@ -50,17 +50,7 @@ export class RatingPageComponent implements OnInit {
     // this.category = new Array(this.availableCourse.length).fill(false);
     // });
 
-    const courseOb = this.courseService.getCourses();
-    const professorOb = this.professorService.getProfessors();
-
-    ObservableForkJoin(courseOb, professorOb).subscribe(res => {
-      this.professors = this.professorService.getProfessorsWithCourses();
-      this.filteredProfessors = this.inputControl.valueChanges
-        .pipe(
-          startWith(''),
-          map(_ => this.professorsFilter())
-        );
-    });
+    this.loadData();
   }
 
   onSortChange() {
@@ -142,7 +132,26 @@ export class RatingPageComponent implements OnInit {
   }
 
   openReviewDialog(): void {
-    this.dialogService.openReviewDialog(this.viewContainerRef);
+    this.dialogService.openReviewDialog(this.viewContainerRef).subscribe(res => {
+      if (res) {
+        this.professors = undefined;
+        this.loadData();
+      }
+    });
+  }
+
+  loadData(): void {
+    const courseOb = this.courseService.getCourses();
+    const professorOb = this.professorService.getProfessors();
+
+    ObservableForkJoin(courseOb, professorOb).subscribe(res => {
+      this.professors = this.professorService.getProfessorsWithCourses();
+      this.filteredProfessors = this.inputControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(_ => this.professorsFilter())
+        );
+    });
   }
 
   private log(message: string) {

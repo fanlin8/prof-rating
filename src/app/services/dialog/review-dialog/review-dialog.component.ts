@@ -118,7 +118,7 @@ export class ReviewDialogComponent implements OnInit {
     this.reviewForm.patchValue({ submitted: true });
     this.reviewService.submitNewReview(this.prepareNewReview()).subscribe(data => {
       if (data) {
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       } else {
         this.log('Error while submitting!');
         this.rebuildForm();

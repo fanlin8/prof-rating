@@ -23,6 +23,11 @@ export class ReviewService extends GenericService {
     return this._professorReviewsMap;
   }
 
+  private _needReload = false;
+  public get needReload(): boolean {
+    return this._needReload;
+  }
+
   constructor(
     private http: HttpClient,
     private auth: AuthService,
@@ -37,13 +42,16 @@ export class ReviewService extends GenericService {
     };
 
     return this.http.post<Review>(this.reviewsUrl, review, httpOptions).pipe(
-      tap(resultJSON => this.log(`Succesfully created review with id ${resultJSON._id}`)),
+      tap(resultJSON => {
+        this.log(`Succesfully created review with id ${resultJSON._id}`);
+        this._needReload = true;
+      }),
       catchError(this.handleError<any>(`creating review`))
     );
   }
 
   getReviewsByProfessorId(id: string): Observable<Review[]> {
-    if (this.professorReviewsMap.get(id)) {
+    if (this.professorReviewsMap.get(id) && !this._needReload) {
       return observableOf(this.professorReviewsMap.get(id));
     }
 
@@ -52,6 +60,7 @@ export class ReviewService extends GenericService {
         tap(reviews => {
           this.log(`Reviews DATA got with size ${reviews.length}`);
           this.professorReviewsMap.set(id, reviews);
+          this._needReload = false;
         }),
         catchError(this.handleError('getReviewsByProfessorId()', []))
       );
