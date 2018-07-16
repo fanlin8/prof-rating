@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  webServiceUrl: 'http://54.89.166.187:9090/'
+  webServiceUrl: 'http://54.91.80.184:9090/'
 };
