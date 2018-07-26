@@ -1,6 +1,6 @@
 FROM nginx:1.15.2
 
-LABEL author="Erick <linfan0558@gmail.com>"
+LABEL author="Fan Lin <linfan0558@gmail.com>"
 
 USER root
 
@@ -34,7 +34,7 @@ RUN apt-get update -y \
     # && export HTTP_PROXY=http://156.132.20.149:80 \
     # GIT pull
     # && git config --global http.sslVerify false \
-    &&git clone https://github.com/fanlin8/prof-rating.git \
+    && git clone https://github.com/fanlin8/prof-rating.git \
     # Cleaning
     && apt-get remove --purge -y ${BUILD_PACKAGES} && apt-get autoremove -y
 
