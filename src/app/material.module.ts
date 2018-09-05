@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import {
   MatButtonModule, MatCheckboxModule, MatSidenavModule, MatToolbarModule, MatInputModule, MatRadioModule,
@@ -10,7 +9,6 @@ import {
 
 @NgModule({
   imports: [
-    CommonModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatCheckboxModule,
